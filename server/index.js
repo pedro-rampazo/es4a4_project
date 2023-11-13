@@ -146,7 +146,7 @@ app.post("/vincularAoProjeto", (req, res) => {
 
         const idLogin = userResult[0].idLogin;
 
-        db.query("INSERT INTO userProject (idLogin, idProject, nameProject) VALUES (?, ?, ?)", [idLogin, idProject, nameProject], (insertErr, insertResult) => {
+        db.query("INSERT INTO userproject (idLogin, idProject, nameProject) VALUES (?, ?, ?)", [idLogin, idProject, nameProject], (insertErr, insertResult) => {
           if (insertErr) {
             console.log("error aqui 4:", insertErr);
             return res.status(500).json({ error: "Erro ao inserir dados na tabela userData" });
