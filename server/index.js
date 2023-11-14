@@ -8,9 +8,9 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const db = mysql.createPool({
-  host: "127.0.0.1", // ALTERAR PARA 127.0.0.1 PARA ERRO DE CONEXAO
+  host: "localhost", // ALTERAR PARA 127.0.0.1 PARA ERRO DE CONEXAO
   user: "root",
-  password: "P*e*d*r*o*16541815",
+  password: "password",
   database: "gerenciadorTarefas"
 });
 
@@ -155,7 +155,7 @@ app.post("/vincularAoProjeto", (req, res) => {
 
         const idLogin = userResult[0].idLogin;
 
-        db.query("INSERT INTO userproject (idLogin, idProject, nameProject) VALUES (?, ?, ?)", [idLogin, idProject, nameProject], (insertErr, insertResult) => {
+        db.query("INSERT INTO userProject (idLogin, idProject, nameProject) VALUES (?, ?, ?)", [idLogin, idProject, nameProject], (insertErr, insertResult) => {
           if (insertErr) {
             console.log("error aqui 4:", insertErr);
             return res.status(500).json({ error: "Erro ao inserir dados na tabela userData" });

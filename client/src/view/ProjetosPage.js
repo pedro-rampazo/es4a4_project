@@ -29,11 +29,12 @@ const ProjetosPage = () => {
 
       {hasProject ? (
         <React.Fragment>
-          <p>Nome do Projeto: <br /> {nameProject}</p>
+          <p>Nome do Projeto:</p>
+          <p>{nameProject}</p>
           <section className="project-list">
             <div className="project-item">
               <Link to={`/abrir_projeto/${idLogin}`}>
-                <button>Abrir meu projeto</button>
+                <button class="standard-button">Abrir meu projeto</button>
               </Link>
             </div>
           </section>

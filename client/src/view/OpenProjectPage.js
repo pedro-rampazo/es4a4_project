@@ -254,8 +254,8 @@ const OpenProject = () => {
     <main>
       <h1>{nameProject}</h1>
 
-      <button onClick={() => setShowSobreProjeto(true)}>Sobre o Projeto</button>
-      <button onClick={() => setShowMembros(true)}>Membros</button>
+      <button onClick={() => setShowSobreProjeto(true)} class="standard-button">Sobre o Projeto</button>
+      <button onClick={() => setShowMembros(true)} class="standard-button">Membros</button>
 
       <p>Responsável: {responsable}</p>
 
@@ -266,7 +266,7 @@ const OpenProject = () => {
       >
         {selectedTask ? (
           isEditing ? (
-            <div>
+            <div id="task-modal">
               <label>Nome da tarefa</label>
               <input
                 type="text"
@@ -296,8 +296,8 @@ const OpenProject = () => {
               />
             </div>
           ) : (
-            <div>
-              <h2>{selectedTask.name}</h2>
+            <div id="task-modal">
+              <h2 class="subtitle">{selectedTask.name}</h2>
               <p>Responsável pela tarefa: {selectedTask.responsable}</p>
               <p>Descrição da tarefa: {selectedTask.description}</p>
               <p>Início da tarefa: {selectedTask.startDate}</p>
@@ -305,7 +305,7 @@ const OpenProject = () => {
               <p>Status da tarefa: {selectedTask.status}</p>
               <p>Dependências da tarefa: {selectedTask.dependencies}</p>
               <p>Observação: {selectedTask.observation}</p>
-              <button onClick={() => setShowTarefaModal(false)}>Fechar</button>
+              <button onClick={() => setShowTarefaModal(false)} class="standard-button">Fechar</button>
             </div>
           )
         ) : (
@@ -317,48 +317,50 @@ const OpenProject = () => {
         isOpen={showSobreProjeto}
         onRequestClose={() => setShowSobreProjeto(false)}
         contentLabel="Sobre o Projeto Modal"
+        id="about-project-modal"
       >
-        <h2>Sobre o Projeto</h2>
+        <h2 class="subtitle">Sobre o Projeto</h2>
         <p>{description}</p>
-        <button onClick={() => setShowSobreProjeto(false)}>Fechar</button>
+        <button onClick={() => setShowSobreProjeto(false)} class="standard-button">Fechar</button>
       </Modal>
 
       <Modal
         isOpen={showMembros}
         onRequestClose={() => setShowMembros(false)}
         contentLabel="Membros Modal"
+        id="members-modal"
       >
-        <h2>Membros</h2>
+        <h2 class="subtitle">Membros</h2>
         {members.map((member, index) => (
           <p key={index}>{member}</p>
         ))}
-        <button onClick={() => setShowMembros(false)}>Fechar</button>
+        <button onClick={() => setShowMembros(false)} class="standard-button">Fechar</button>
       </Modal>
 
       {showExclusaoNotification && (
         <div className="success-notification">
           <p>A tarefa foi excluída com sucesso.</p>
-          <button onClick={() => setShowExclusaoNotification(false)}>Fechar</button>
+          <button onClick={() => setShowExclusaoNotification(false)} class="options-button">Fechar</button>
         </div>
       )}
 
       {showCriacaoTarefaNotification && (
         <div className="success-notification">
           <p>A tarefa foi criada com sucesso.</p>
-          <button onClick={() => setShowCriacaoTarefaNotification(false)}>Fechar</button>
+          <button onClick={() => setShowCriacaoTarefaNotification(false)} class="options-button">Fechar</button>
         </div>
       )}
 
       {showEdicaoNotification && (
         <div className="success-notification">
           <p>A edição foi salva com sucesso.</p>
-          <button onClick={handleAtualizarPagina}>Atualizar Página</button>
+          <button onClick={handleAtualizarPagina} class="options-button">Atualizar Página</button>
         </div>
       )}
 
       <br />
 
-      <h2>Tarefas</h2>
+      <h2 class="subtitle">Tarefas</h2>
       {taskNames.length > 0 ? (
         <ul>
           {taskNames.map((taskName, index) => (
@@ -405,15 +407,15 @@ const OpenProject = () => {
                     />
                   </div>
 
-                  <button onClick={() => handleSalvarEdicao(selectedTask.name, selectedTask)}>Salvar Edição</button>
+                  <button onClick={() => handleSalvarEdicao(selectedTask.name, selectedTask)} class="options-button">Salvar Edição</button>
 
                 </div>
 
               ) : (
                 <div>
-                  <button onClick={() => handleVerTarefa(taskName)}>Ver Tarefa</button>
-                  <button onClick={() => handleExcluirTarefa(taskName)}>Excluir Tarefa</button>
-                  <button onClick={() => handleEditarTarefa(taskName)}>Editar Tarefa</button>
+                  <button onClick={() => handleVerTarefa(taskName)} class="options-button">Ver Tarefa</button>
+                  <button onClick={() => handleExcluirTarefa(taskName)} class="options-button">Excluir Tarefa</button>
+                  <button onClick={() => handleEditarTarefa(taskName)} class="options-button">Editar Tarefa</button>
                 </div>
               )}
             </li>
@@ -422,13 +424,13 @@ const OpenProject = () => {
       ) : (
         <p>Nenhuma tarefa foi criada.</p>
       )}
-      <button onClick={() => setShowCriarTarefa(true)}>Criar tarefa</button>
+      <button onClick={() => setShowCriarTarefa(true)} class="standard-button">Criar tarefa</button>
 
 
       <br></br>
-      <div>
-        <h2>Chat</h2>
-        <div>
+      <div class="chat">
+        <h2 class="subtitle">Chat</h2>
+        <div class="chat-text">
           {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
           ))}
@@ -437,8 +439,10 @@ const OpenProject = () => {
           type="text"
           value={currentMessage}
           onChange={(e) => setCurrentMessage(e.target.value)}
+          class="chat-input"
+          placeholder="digite algo..."
         />
-        <button onClick={sendMessage}>Enviar</button>
+        <button onClick={sendMessage} class="chat-button">Enviar</button>
       </div>
 
 
